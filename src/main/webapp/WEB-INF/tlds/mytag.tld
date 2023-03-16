@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+        "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd" >
+<taglib> <!-- 代表开始一个标记库的描述-->
+    <tlib-version>1.0</tlib-version><!-- taglib 标签库版本号 -->
+    <jsp-version>1.2</jsp-version> <!-- 标记所支持的 JSP 的版本 -->
+    <short-name>Maytag</short-name> <!--标记库别名，相当于注释，无实际用途-->
+
+
+
+    <tag>
+        <name>example</name>
+        <tag-class>tag.CalculatorTag</tag-class>
+        <body-content>empty</body-content>
+        <description>a simple calculator</description>
+        <attribute>
+            <name>num1</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        <name>num2</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+        <attribute>
+            <name>operation</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+</taglib>

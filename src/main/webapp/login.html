@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登陆界面</title>
+
+
+    <style>
+        .srouce{
+            text-align: center;
+            color: #ffffff;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+
+        <div class="form-container">
+
+            <div class="form-body">
+                <h2 class="title">欢迎登录该系统</h2>
+                <!--验证码输入框-->
+                <form  action="/loginServlet" name="login" method="GET">
+                    <label for="email">用户名</label>
+                    <input type="email" name="email" id="email" placeholder="输入你的用户名"><br>
+                    <label for="password">密码</label>
+                    <input type="password" name="password" id="password" placeholder="输入你的密码"><br>
+                    <label for="验证码">验证码</label>
+                    <input type="text" name="验证码" id="验证码" placeholder="请输入验证码"><br>
+                    <!--验证码输入框-->
+                    <canvas  id="myCanvas" width="70px" height="27px" style="border:1px solid #d3d3d3;"></canvas><br>
+                    <button type="submit" id="login"  >登录</button>
+                </form>
+            </div><!-- FORM BODY   <input type="submit" onclick=test() value="登录">  -->
+
+            <div class="form-footer">
+                <div>
+                    <span>如果没有账号：</span> <a href="register.jsp">注册</a>
+                </div>
+            </div><!-- FORM FOOTER -->
+
+        </div><!-- FORM CONTAINER -->
+
+    </div>
+
+<script>
+    function createCode() {
+        var codeLength = 4;//验证码的长度，可变
+        var canvas=document.getElementById('myCanvas');//获取画布
+        var selectChar = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');//所有候选组成验证码的字符
+        code = "";
+        for (var i = 0; i < codeLength; i++) {
+            var charIndex = Math.floor(Math.random() * 36);
+            code += selectChar[charIndex];
+        }
+        window.code=code
+
+        if (canvas) {
+            var ctx=canvas.getContext('2d');
+            ctx.fillStyle='#FFFFFF';
+            ctx.fillRect(0,0,70,27);
+            ctx.font="20px arial";
+            // 创建渐变
+            var gradient=ctx.createLinearGradient(0,0,canvas.width,0);
+            gradient.addColorStop("0","magenta");
+            gradient.addColorStop("0.5","blue");
+            gradient.addColorStop("1.0","red");
+            // 用渐变填色
+            ctx.strokeStyle=gradient;
+            ctx.strokeText(code,5,20);//画布上添加验证码
+        }
+        // 点击切换随机数
+        document
+            .getElementById('myCanvas')
+            .addEventListener('click',createCode)
+        // 提交进行对比
+        document.getElementById('login').onclick = function() {
+            const inputCode = document.querySelector('#验证码');
+            if (inputCode.value != window.code) {
+                alert('您输入的验证码不正确');
+                inputCode.value = '';
+                return false;
+            }
+            let pwd = document.getElementById("password").value;
+            console.log(pwd)
+            if(pwd.length<=6) {
+                alert("密码必须大于6位数字");
+                return false;
+            }
+            var pwdRegex = new RegExp('(?=.*[0-9])(?=.*[a-zA-Z]).{6,30}');
+            if (!pwdRegex.test(pwd)) {
+                alert("您的密码复杂度太低（密码中必须包含字母、数字），请及时修改密码！");
+                return false;
+
+            }
+            return true;
+        }
+    }
+</script>
+    <script type="text/javascript"> window.onload = function (){ createCode()}
+    </script>
+</body>
+</html>

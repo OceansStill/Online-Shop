@@ -1,0 +1,24 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="J2EE:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>false</exploded>
+        <module>J2EE</module>
+        <packaging>war</packaging>
+        <unpackNestedArchives>false</unpackNestedArchives>
+      </options>
+    </properties>
+    <root id="archive" name="J2EE-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="J2EE:war exploded" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="jspSmartUpload" />
+        </element>
+        <element id="directory" name="classes">
+          <element id="jpa-descriptors" facet="J2EE/jpa/JPA" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
